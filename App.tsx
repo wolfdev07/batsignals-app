@@ -22,23 +22,14 @@ const AppContent: React.FC = () => {
     checkPinStatus();
   }, [isLocked]);
 
-  if (isCheckingPin) {
-    return <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#0B132B' }}><ActivityIndicator size="large" color="#7B68EE" /></View>;
-  }
+  // Animación de carga
+  if (isCheckingPin) return <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#0B132B' }}><ActivityIndicator size="large" color="#7B68EE" /></View>;
 
-  if (!hasPin) {
-    return <SetupPinScreen />;
-  }
+  // Si el usuario no tiene un PIN creado, envía a la creación de una
+  if (!hasPin) return <SetupPinScreen />;
 
   // Si la app está desbloqueada, mostramos el navegador principal.
-  // El NavigationContainer envuelve todo para que la navegación esté disponible.
-  if (!isLocked) {
-    return (
-      <AppLockManager>
-        <AppNavigator />
-      </AppLockManager>
-    );
-  }
+  if (!isLocked) return (<AppLockManager><AppNavigator /></AppLockManager>);
 
   // Si no, mostramos la pantalla de bloqueo.
   return <LockScreen />;
