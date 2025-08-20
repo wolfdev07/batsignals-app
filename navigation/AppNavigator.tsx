@@ -1,30 +1,27 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AuthLoadingScreen from "../screens/AuthLoadingScreen";
-import MainAppTabs from "../screens/MainAppTabs";
+import MainAppTabs from '../screens/MainAppTabs';
 
+// La pantalla "Auth" se ha eliminado de aquí.
 export type RootStackParamList = {
-    Auth: undefined;
-    Main: undefined;
+  MainTabs: undefined;
+  // Aquí añadirías otras pantallas, como la de "Detalles de Conversación", etc.
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigator: React.FC = () => {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator
-            initialRouteName="Auth"
-            screenOptions={{
-                headerShown: false,
-            }}
-            >
-                <Stack.Screen name="Auth" component={AuthLoadingScreen} />
-                <Stack.Screen name="Main" component={MainAppTabs} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
+  return (
+    // El NavigationContainer se ha movido a App.tsx
+    <Stack.Navigator
+      initialRouteName="MainTabs"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="MainTabs" component={MainAppTabs} />
+    </Stack.Navigator>
+  );
 };
 
 export default AppNavigator;
